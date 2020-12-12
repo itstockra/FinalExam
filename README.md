@@ -1,8 +1,6 @@
 # FinalExam
 final exam for CSIT-207
 
-# Matthew Kessler
-
 
 index.php
 --------------
