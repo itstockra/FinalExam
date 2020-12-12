@@ -7,13 +7,21 @@ index.php
 main page:
 responds to the following GET endpoints:
 /quarterbacks                   #returns quarterbacks table joined with teams table
+
 /teams                          #returns teams table
+
 /stadiums                       #returns stadiums table joined with teams table
+
 /quarterbacks/{orderByStat}     #querys quarterbacks table, returns ordered list by specified stat
+
 /teams/{conference}             #querys teams table, returns AFC or NFC teams
+
 /stadiums/capacity              #querys stadium table, orders by stadium capacity
+
 /stadiums/indoor                #querys stadium table, lists the indoor stadiums
+
 /quarterbacks/teams/stadiums    #joins all 3 tables
+
 
 responds to the following POST request:
 /addQb  #allows you to add new QB information you would like posted to database
