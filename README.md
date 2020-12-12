@@ -1,27 +1,30 @@
 # FinalExam
 final exam for CSIT-207
 
+# Matthew Kessler
+
 
 index.php
 --------------
-main page
+main page:
 responds to the following GET endpoints:
-/quarterbacks
-/teams
-/stadiums
-/quarterbacks/{orderByStat}
-/teams/{conference}
-/stadiums/capacity
-/stadiums/indoor
-/quarterbacks/teams/stadiums
+/quarterbacks                   #returns quarterbacks table joined with teams table
+/teams                          #returns teams table
+/stadiums                       #returns stadiums table joined with teams table
+/quarterbacks/{orderByStat}     #querys quarterbacks table, returns ordered list by specified stat
+/teams/{conference}             #querys teams table, returns AFC or NFC teams
+/stadiums/capacity              #querys stadium table, orders by stadium capacity
+/stadiums/indoor                #querys stadium table, lists the indoor stadiums
+/quarterbacks/teams/stadiums    #joins all 3 tables
 
 responds to the following POST request:
-/addQb  #allows you to add new information you would like posted to database
+/addQb  #allows you to add new QB information you would like posted to database
         #click button on /addQb posts data brings you to /postQb page
 
 Quarterback.php Class
 -----------------------
 Provides the methods and properties to add a new quarterback to the database in the proper format
+Links to the db class for access to the database when adding data
 
 api.php Class
 -----------------
