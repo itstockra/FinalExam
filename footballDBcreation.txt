@@ -1,0 +1,150 @@
+<--------------------------->
+<---- Matthew Kessler ------>
+<----  footballDB      ----->
+<--------------------------->
+
+mysql> CREATE SCHEMA footballDB;
+Query OK, 1 row affected (0.14 sec)
+
+mysql> USE footballDB
+Database changed
+
+mysql> CREATE TABLE teams(
+    -> id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> name VARCHAR(40) NOT NULL,
+    -> head_coach VARCHAR(40) NOT NULL,
+    -> gm VARCHAR(40) NOT NULL,
+    -> conference ENUM('AFC','NFC')
+    -> ) ENGINE=InnoDb;
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> CREATE TABLE quarterbacks(
+    -> id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> team_id INT UNSIGNED NOT NULL,
+    -> first_name VARCHAR(30) NOT NULL,
+    -> last_name VARCHAR(30) NOT NULL,
+    -> passing_yds SMALLINT UNSIGNED NOT NULL,
+    -> passing_td TINYINT UNSIGNED NOT NULL,
+    -> games_played TINYINT UNSIGNED NOT NULL,
+    -> rushing_yds SMALLINT UNSIGNED NOT NULL,
+    -> rushing_td TINYINT UNSIGNED NOT NULL,
+    -> FOREIGN KEY (team_id) REFERENCES teams(id)
+    -> ) ENGINE=InnoDb;
+Query OK, 0 rows affected (1.09 sec)
+
+mysql> CREATE TABLE stadiums(
+    -> team_id INT UNSIGNED NOT NULL,
+    -> stadium_name VARCHAR(50) NOT NULL,
+    -> capacity INT UNSIGNED NOT NULL,
+    -> indoor ENUM('Yes','No'),
+    -> FOREIGN KEY (team_id) REFERENCES teams(id)
+    -> ) ENGINE=InnoDb;
+Query OK, 0 rows affected (0.44 sec)
+
+mysql> INSERT INTO teams (name,head_coach,gm,conference) VALUES 
+    -> ("Arizona Cardinals","Kliff Kingsbury","Steve Keim","NFC"),
+    -> ("Atlanta Falcons","Raheem Morris","Rich McKay","NFC"),
+    -> ("Baltimore Ravens","John Harbaugh","Eric DeCosta","AFC"),
+    -> ("Buffalo Bills","Sean McDermott","Brandon Beane","AFC"),
+    -> ("Carolina Panthers","Matt Rhule","Matt Hurney","NFC"),
+    -> ("Chicago Bears","Matt Nagy","Ryan Pace","NFC"),
+    -> ("Cincinnati Bengals","Zac Taylor","Mike Brown","AFC"),
+    -> ("Cleveland Browns","Kevin Stefanski","Andrew Berry","AFC"),
+    -> ("Dallas Cowboys","Mike McCarthy","Jerry Jones","NFC"),
+    -> ("Denver Broncos","Vic Fangio","John Elway","AFC"),
+    -> ("Detroit Lions","Darrell Bevell","Vacant","NFC"),
+    -> ("Green Bay Packers","Matt LaFleur","Brian Gutekunst","NFC"),
+    -> ("Houston Texans","Romeo Crennel","Jack Easterby","AFC"),
+    -> ("Indianapolis Colts","Frank Reich","Chris Ballard","AFC"),
+    -> ("Jacksonville Jaguars","Doug Marrone","Vacant","AFC"),
+    -> ("Kansas City Chiefs","Andy Reid","Brett Veach","AFC"),
+    -> ("Las Vegas Raiders","Jon Gruden","Mike Mayock","AFC"),
+    -> ("Los Angeles Chargers","Anthony Lynn","Tom Telesco","AFC"),
+    -> ("Los Angeles Rams","Sean McVay","Les Snead","NFC"),
+    -> ("Miami Dolphins","Brian Flores","Chris Grier","AFC"),
+    -> ("Minnesota Vikings","Mike Zimmer","Rick Spielman","NFC"),
+    -> ("New England Patriots","Bill Belichick","Bill Belichick","AFC"),
+    -> ("New Orleans Saints","Sean Payton","Mickey Loomis","NFC"),
+    -> ("New York Giants","Joe Judge","Dave Gettleman","NFC"),
+    -> ("New York Jets","Adam Gase","Joe Douglas","AFC"),
+    -> ("Philadelphia Eagles","Doug Pederson","Howie Roseman","NFC"),
+    -> ("Pittsburgh Steelers","Mike Tomlin","Kevin Colbert","AFC"),
+    -> ("San Francisco 49ers","Kyle Shanahan","John Lynch","NFC"),
+    -> ("Seattle Seahawks","Pete Carroll","John Schneider","NFC"),
+    -> ("Tampa Bay Buccaneers","Bruce Arians","Jason Licht","NFC"),
+    -> ("Tennessee Titans","Mike Vrabel","Jon Robinson","AFC"),
+    -> ("Washington Football Team","Ron Rivera","Ron Rivera","NFC");
+Query OK, 32 rows affected (0.14 sec)
+Records: 32  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO quarterbacks(team_id,first_name,last_name,passing_yds,passing_td,games_played,rushing_yds,rushing_td) VALUES 
+    -> (1,"Klyer","Murray",2814,19,11,650,10),
+    -> (2,"Matt","Ryan",3163,17,11,73,1),
+    -> (3,"Lamar","Jackson",1948,15,10,575,3),
+    -> (4,"Josh","Allen",3028,22,11,311,6),
+    -> (5,"Teddy","Bridgewater",2819,14,11,208,3),
+    -> (6,"Nick","Foles",1852,10,8,3,1),
+    -> (7,"Joe","Burrow",2688,13,10,142,3),
+    -> (8,"Baker","Mayfield",2108,17,11,76,0),
+    -> (9,"Andy","Dalton",870,5,6,42,0),
+    -> (10,"Drew","Lock",1767,7,8,88,2),
+    -> (11,"Matthew","Stafford",2876,18,11,85,0),
+    -> (12,"Aaron","Rodgers",3100,33,11,90,1),
+    -> (13,"Deshaun","Watson",3201,24,11,293,2),
+    -> (14,"Philip","Rivers",2978,16,11,2,0),
+    -> (15,"Gardner","Minshew",1855,13,7,122,1),
+    -> (16,"Patrick","Mahomes",3497,30,11,215,2),
+    -> (17,"Justin","Herbert",3015,23,10,185,3),
+    -> (18,"Jared","Goff",3021,16,11,55,2),
+    -> (19,"Derek","Carr",2646,19,11,124,0),
+    -> (20,"Ryan","Fitzpatrick",1909,12,8,151,2),
+    -> (21,"Kirk","Cousins",2768,23,11,75,1),
+    -> (22,"Drew","Brees",2196,18,9,64,1),
+    -> (23,"Cam","Newton",1984,4,10,387,9),
+    -> (24,"Daniel","Jones",2335,8,11,403,1),
+    -> (25,"Sam","Darnold",1242,3,7,147,1),
+    -> (26,"Carson","Wentz",2541,16,11,258,5),
+    -> (27,"Ben","Roethlisberger",2534,24,10,13,0),
+    -> (28,"Russell","Wilson",3216,31,11,379,1),
+    -> (29,"Jimmy","Garoppolo",1096,7,6,25,0),
+    -> (30,"Tom","Brady",3300,28,12,7,3),
+    -> (31,"Ryan","Tannehill",2608,23,11,152,2),
+    -> (32,"Alex","Smith",1067,3,5,3,0);
+Query OK, 32 rows affected (0.12 sec)
+Records: 32  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO stadiums (team_id,stadium_name,capacity,indoor) VALUES 
+    -> (1,"State Farm Stadium",63400,"Yes"),
+    -> (2,"Mercedes-Benz Stadium",71000,"Yes"),
+    -> (3,"M&T Bank Stadium",71008,"No"),
+    -> (4,"Bills Stadium",71608,"No"),
+    -> (5,"Bank of America Stadium",75523,"No"),
+    -> (6,"Soldier Field",61500,"No"),
+    -> (7,"Paul Brown Stadium",65515,"No"),
+    -> (8,"FirstEnergy Stadium",67895,"No"),
+    -> (9,"AT&T Stadium",80000,"Yes"),
+    -> (10,"Empower Field at Mile High",76125,"No"),
+    -> (11,"Ford Field",65000,"Yes"),
+    -> (12,"Lambeau Field",81441,"No"),
+    -> (13,"NRG Stadium",72220,"Yes"),
+    -> (14,"Lucas Oil Stadium",67000,"Yes"),
+    -> (15,"TIAA Bank Field",69132,"No"),
+    -> (16,"Arrowhead Stadium",76416,"No"),
+    -> (17,"Allegiant Stadium",65000,"Yes"),
+    -> (18,"SoFi Stadium",70240,"Yes"),
+    -> (19,"SoFi Stadium",70240,"Yes"),
+    -> (20,"Hard Rock Stadium",65326,"No"),
+    -> (21,"U.S. Bank Stadium",66655,"Yes"),
+    -> (22,"Gillette Stadium",66829,"No"),
+    -> (23,"Mercedes-Benz Superdome",73208,"Yes"),
+    -> (24,"MetLife Stadium",82500,"No"),
+    -> (25,"MetLife Stadium",82500,"No"),
+    -> (26,"Lincoln Financial Field",69596,"No"),
+    -> (27,"Heinz Field",68400,"No"),
+    -> (28,"Levi's Stadium",68500,"No"),
+    -> (29,"Lumen Field",69000,"No"),
+    -> (30,"Raymond James Stadium",65890,"No"),
+    -> (31,"Nissan Stadium",69143,"No"),
+    -> (32,"FedEx Field",82000,"No");
+Query OK, 32 rows affected (0.12 sec)
+Records: 32  Duplicates: 0  Warnings: 0
